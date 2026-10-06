@@ -112,6 +112,8 @@ export async function render() {
     node = await mod.render(ctx);
   } catch (err) {
     console.error(err);
+    // Old and new files mixed after a deploy: reload to get one consistent version.
+    if (window.__gcmIsMismatch?.(err?.message)) { window.__gcmRecover(); return; }
     node = errorView(err);
   }
   if (token !== renderToken) return; // a newer navigation won
@@ -139,7 +141,7 @@ function errorView(err) {
     h('p', {}, offline
       ? 'You are offline and this page has not been downloaded. Reconnect, or download modules for offline use in Settings.'
       : err.notFound ? 'The link may be out of date.' : `The page could not load (${err.message}). Your progress is safe on this device.`),
-    h('div', { class: 'row' }, h('a', { class: 'btn primary', href: '#/' }, 'Go to the course map'), h('button', { class: 'btn', onclick: () => render() }, 'Try again')));
+    h('div', { class: 'row' }, h('a', { class: 'btn primary', href: '#/' }, 'Go to the course map'), h('button', { class: 'btn', onclick: () => (err.notFound ? render() : location.reload()) }, 'Try again')));
 }
 
 // ------------------------------------------------------------------ connectivity indicator
@@ -158,7 +160,8 @@ async function registerSW() {
   // Developers can bypass the worker while editing: localStorage['gcm101:dev-nosw'] = '1'.
   try { if (localStorage.getItem('gcm101:dev-nosw') === '1') { (await navigator.serviceWorker.getRegistrations()).forEach((r) => r.unregister()); return; } } catch { /* ignore */ }
   try {
-    const reg = await navigator.serviceWorker.register('sw.js', { scope: './' });
+    // updateViaCache 'none': update checks fetch sw.js and sw-manifest.js from the network, not the HTTP cache.
+    const reg = await navigator.serviceWorker.register('sw.js', { scope: './', updateViaCache: 'none' });
     reg.addEventListener('updatefound', () => {
       const nw = reg.installing;
       nw?.addEventListener('statechange', () => {
@@ -178,6 +181,7 @@ async function registerSW() {
 
 // ------------------------------------------------------------------ boot
 async function boot() {
+  window.__gcmBooted = true;
   $('#logo').replaceWith(logo());
   $$('[data-icon]').forEach((el) => el.replaceWith(icon(el.dataset.icon)));
   // The skip link must not change the hash (the router owns it).

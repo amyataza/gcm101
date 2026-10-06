@@ -3,6 +3,14 @@
 All notable changes to the GCM-101 app. Content changes follow the syllabus version
 (`Intro-Global-Capital-Markets-Syllabus.md`); app changes follow semantic versioning.
 
+## [1.0.2] — 2026-10-06
+
+### Fixed
+- After a deploy, the course map could fail with "Importing binding name 'fmtHoursLong' is not found": GitHub Pages' 10-minute caching (browser, CDN) and the service worker could serve a new module with an old one. Every module is now loaded through a build-generated import map with a version stamp; the service worker installs with `cache: 'reload'`, serves only from its own version's cache and checks for updates without the HTTP cache; `boot.js` recovers automatically if a mismatch still occurs.
+
+### Added
+- `tests/e2e/upgrade.mjs`: deploys a new version while a page is open, under GitHub-style caching (it reproduces the bug on the previous code). Browser tests clean up their temporary profiles.
+
 ## [1.0.1] — 2026-10-06 (public beta)
 
 Syllabus **v1.0.1**.

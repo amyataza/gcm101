@@ -12,7 +12,8 @@ const CONTENT = 'gcm101-content';
 const PYODIDE = 'gcm101-pyodide';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(shell)));
+  // cache: 'reload' bypasses the HTTP cache, so the new shell can never pick up a stale file.
+  event.waitUntil(caches.open(SHELL).then((c) => c.addAll(shell.map((u) => new Request(u, { cache: 'reload' })))));
 });
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
@@ -26,7 +27,7 @@ const timeout = (ms, p) => Promise.race([p, new Promise((_, rej) => setTimeout((
 
 async function staleWhileRevalidate(req, cacheName) {
   const cache = await caches.open(cacheName);
-  const cached = (await cache.match(req)) || (await caches.match(req));
+  const cached = await cache.match(req);
   const network = fetch(req).then((res) => { if (res.ok) cache.put(req, res.clone()); return res; }).catch(() => null);
   return cached || (await network) || new Response(JSON.stringify({ error: 'offline' }), { status: 503, headers: { 'Content-Type': 'application/json' } });
 }
@@ -69,16 +70,26 @@ self.addEventListener('fetch', (event) => {
 
   if (req.mode === 'navigate') {
     event.respondWith((async () => {
-      try { return await timeout(4000, fetch(req)); } catch { return (await caches.match('index.html')) || (await caches.match('./')) || Response.error(); }
+      try { return await timeout(4000, fetch(req)); } catch { const c = await caches.open(SHELL); return (await c.match('index.html')) || (await c.match('./')) || Response.error(); }
     })());
     return;
   }
   const path = url.pathname;
   if (path.includes('/content/audio/')) { event.respondWith(rangeFromCache(req)); return; }
-  if (path.includes('/content/')) { event.respondWith(staleWhileRevalidate(req, CONTENT)); return; }
-  event.respondWith((async () => {
-    const cached = await caches.match(req, { ignoreSearch: true });
-    if (cached) return cached;
-    try { return await fetch(req); } catch { return Response.error(); }
-  })());
+  event.respondWith(fromShellOr(req, url));
 });
+
+// Code, styles and the content files listed in the shell are served only from THIS version's
+// cache, so one page never mixes versions. A request for a different version (?v=…) — e.g. a page
+// that loaded after a deploy while this worker is still in charge — goes to the network.
+async function fromShellOr(req, url) {
+  const shellCache = await caches.open(SHELL);
+  const v = url.searchParams.get('v');
+  const isContent = url.pathname.includes('/content/');
+  if (!v || v === version) {
+    const hit = (await shellCache.match(req)) || (!isContent && (await shellCache.match(req, { ignoreSearch: true })));
+    if (hit) return hit;
+  }
+  if (isContent) return staleWhileRevalidate(req, CONTENT); // module files (hash in URL), audio index, etc.
+  try { return await fetch(req); } catch { return Response.error(); }
+}

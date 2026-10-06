@@ -15,7 +15,8 @@ const server = createServer(async (req, res) => {
     if (!file.startsWith(root)) { res.writeHead(403).end(); return; }
     if ((await stat(file).catch(() => null))?.isDirectory()) file = join(file, 'index.html');
     const data = await readFile(file);
-    const headers = { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
+    // SERVE_MAXAGE=600 mimics GitHub Pages caching (used by the upgrade test).
+    const headers = { 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': process.env.SERVE_MAXAGE ? `max-age=${process.env.SERVE_MAXAGE}` : 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
     const range = req.headers.range && /bytes=(\d*)-(\d*)/.exec(req.headers.range);
     if (range) {
       const start = range[1] ? Number(range[1]) : 0;

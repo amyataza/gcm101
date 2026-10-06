@@ -72,8 +72,7 @@ types { application/manifest+json webmanifest; audio/mp4 m4a; }
 
 ## Updating a live site
 
-- **Content only** (syllabus or overlays changed): `npm run build` and redeploy. Learners receive new content on their next visit (stale-while-revalidate); no "update" prompt is needed.
-- **App code changed**: `npm run build` (it regenerates `sw-manifest.js`) and redeploy. Learners see "A new version of the course is ready — Update".
+- **Any change** (syllabus, overlays or code): always run `npm run build` before committing — it re-stamps the module versions in `index.html` and the service-worker manifest. Skipping it can let browsers mix old and new files. Learners see "A new version of the course is ready — Update"; an open page keeps working on its current version until they accept.
 - **Fill in** `web/content/overlays/site.json` (publisher, report link, repository) before the first public release.
 
 ## Privacy note for publishers

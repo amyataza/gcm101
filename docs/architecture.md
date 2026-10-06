@@ -46,12 +46,16 @@ views (web/js/views/*)  →  widgets (web/js/widgets/*)  →  calc.js
 | `js/widgets/python.js` | Lazy Pyodide 0.29.3 loader with consent, scipy fallback shim, output check |
 | `js/widgets/calculator.js` | Exam calculator (safe parser, no `eval`) and formula sheet |
 
+## Versioning: one page never mixes two releases
+
+`tools/build-sw.mjs` hashes the app shell into a version and writes an **import map** into `index.html` that maps every module `js/x.js` to `js/x.js?v=<version>` (the CSP allows the map by its SHA-256 hash). Browsers, the GitHub Pages CDN and the service worker all cache by full URL, so a page that started on version A keeps loading A's modules and a page that started on B loads B's. Without this, GitHub's 10-minute caching could serve a new `home.js` with an old `ui.js` ("Importing binding name … is not found"). As a last line of defence, `boot.js` catches module-mismatch errors and reloads once (then clears this app's caches and service worker if it happens again), and offers a Reload button if the app has not started after 15 seconds. `tests/e2e/upgrade.mjs` tests deploys under GitHub-style caching.
+
 ## Offline strategy (`web/sw.js`)
 
 | Request | Strategy | Cache |
 |---|---|---|
-| App shell: HTML, CSS, JS, icons, `course.json`, `glossary.json`, `about.json`, `audit.json`, overlays | Precached at install, versioned by a hash of their contents (`tools/build-sw.mjs`) | `gcm101-shell-<version>` |
-| Course content (`/content/…`) | Stale-while-revalidate: instant from cache, refreshed in the background — so syllabus updates arrive without an app release | `gcm101-content` |
+| App shell: HTML, CSS, JS, icons, `course.json`, `glossary.json`, `about.json`, `audit.json`, overlays | Precached at install with `cache: 'reload'` (never from a stale HTTP cache); served only from this version's cache; requests for another version go to the network | `gcm101-shell-<version>` |
+| Other course content (module files, whose URLs carry a content hash) | Stale-while-revalidate | `gcm101-content` |
 | Modules | Cached when opened; "Download for offline" (per module) or "Download the whole course" (Settings) | `gcm101-content` |
 | Audio | Cache-first with HTTP Range support for iOS | `gcm101-content` |
 | Pyodide (jsDelivr) | Cache-first after the learner opts in | `gcm101-pyodide` |

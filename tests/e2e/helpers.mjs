@@ -7,8 +7,8 @@ import { launch } from '../../tools/browser.mjs';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-export async function startServer(port = 8181) {
-  const proc = spawn(process.execPath, [join(ROOT, 'tools/serve.mjs'), join(ROOT, 'web'), String(port)], { stdio: 'pipe' });
+export async function startServer(port = 8181, { dir = join(ROOT, 'web'), maxAge } = {}) {
+  const proc = spawn(process.execPath, [join(ROOT, 'tools/serve.mjs'), dir, String(port)], { stdio: 'pipe', env: { ...process.env, ...(maxAge ? { SERVE_MAXAGE: String(maxAge) } : {}) } });
   await new Promise((resolve, reject) => {
     proc.stdout.on('data', (d) => { if (String(d).includes('Serving')) resolve(); });
     proc.on('error', reject);

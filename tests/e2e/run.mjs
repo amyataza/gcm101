@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { ROOT, startServer, newBrowser, BUDGET_PHONE, idbGet, idbSet, onboard, passModules, correctResponse, go } from './helpers.mjs';
 import { chromium } from 'playwright';
 import { chromePath } from '../../tools/browser.mjs';
-import { mkdtempSync } from 'node:fs';
+import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 
 const results = [];
@@ -85,8 +85,13 @@ await t('All routes render at 360 px with no JavaScript errors and no horizontal
   }
   assert(!bad.length, bad.slice(0, 5).join('; '));
   assert(!page.errors.length, page.errors.slice(0, 3).join(' | '));
+  // Every module must load through the import map with the build's version stamp (proves the CSP
+  // hash for the import map is right; an unstamped module would mean versions can mix).
+  const js = await page.evaluate(() => performance.getEntriesByType('resource').map((r) => r.name).filter((n) => /\/js\/.+\.js/.test(n) && !/boot\.js/.test(n)));
+  const unstamped = js.filter((n) => !/\.js\?v=\w{10}$/.test(n));
+  assert(js.length > 15 && !unstamped.length, `unversioned modules: ${unstamped.slice(0, 3).join(', ')}`);
   await ctx.close();
-  return `${routes.length} routes`;
+  return `${routes.length} routes; ${js.length} module loads, all version-stamped`;
 });
 
 // ------------------------------------------------------------------ 3. modes are additive; text always present
@@ -258,7 +263,8 @@ await t('Untimed exams: with the time limit off there is no countdown', async ()
 // ------------------------------------------------------------------ 9. offline
 await t('Offline: installable PWA; visited and downloaded modules work offline; others explain why not', async () => {
   // A persistent (non-incognito) profile, so installability can be checked like a real browser.
-  const ctx = await chromium.launchPersistentContext(mkdtempSync(join(tmpdir(), 'gcm101-')), { ...BUDGET_PHONE, headless: true, executablePath: chromePath() });
+  const profile = mkdtempSync(join(tmpdir(), 'gcm101-'));
+  const ctx = await chromium.launchPersistentContext(profile, { ...BUDGET_PHONE, headless: true, executablePath: chromePath() });
   const page = ctx.pages()[0] || (await ctx.newPage());
   page.errors = [];
   try {
@@ -287,6 +293,7 @@ await t('Offline: installable PWA; visited and downloaded modules work offline; 
   await page.screenshot({ path: join(shots, 'mobile-09-offline.png') });
   } finally {
     await ctx.close();
+    rmSync(profile, { recursive: true, force: true });
   }
 });
 

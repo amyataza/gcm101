@@ -1,6 +1,6 @@
 # Accessibility report
 
-Run 2026-10-06 13:51 UTC with `npm run audit:a11y` (axe-core via Playwright, tags wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa). 20 screens × 3 themes on a 360×640 phone, plus light theme at 1280×900. All `<details>` text alternatives were expanded before each scan.
+Run 2026-10-06 14:15 UTC with `npm run audit:a11y` (axe-core via Playwright, tags wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa). 20 screens × 3 themes on a 360×640 phone, plus light theme at 1280×900. All `<details>` text alternatives were expanded before each scan.
 
 **Result: no automated WCAG 2.2 A/AA violations found** on 80 scans.
 
@@ -14,7 +14,7 @@ Run 2026-10-06 13:51 UTC with `npm run audit:a11y` (axe-core via Playwright, tag
 | Learn (all modes on) | `/m/m4/learn` | phone | light | 0 | 34 |
 | Practise (tracks, widgets) | `/m/m13/practise` | phone | light | 0 | 35 |
 | Check & applied tasks | `/m/m4/check` | phone | light | 0 | 26 |
-| Knowledge check question | `/quiz/m0` | phone | light | 0 | 21 |
+| Knowledge check question | `/quiz/m0` | phone | light | 0 | 23 |
 | Exam intro | `/exam/cp1` | phone | light | 0 | 21 |
 | Glossary | `/glossary` | phone | light | 0 | 26 |
 | Tools | `/tools` | phone | light | 0 | 21 |
@@ -34,7 +34,7 @@ Run 2026-10-06 13:51 UTC with `npm run audit:a11y` (axe-core via Playwright, tag
 | Learn (all modes on) | `/m/m4/learn` | phone | dark | 0 | 34 |
 | Practise (tracks, widgets) | `/m/m13/practise` | phone | dark | 0 | 35 |
 | Check & applied tasks | `/m/m4/check` | phone | dark | 0 | 26 |
-| Knowledge check question | `/quiz/m0` | phone | dark | 0 | 23 |
+| Knowledge check question | `/quiz/m0` | phone | dark | 0 | 21 |
 | Exam intro | `/exam/cp1` | phone | dark | 0 | 21 |
 | Glossary | `/glossary` | phone | dark | 0 | 26 |
 | Tools | `/tools` | phone | dark | 0 | 21 |
@@ -74,7 +74,7 @@ Run 2026-10-06 13:51 UTC with `npm run audit:a11y` (axe-core via Playwright, tag
 | Learn (all modes on) | `/m/m4/learn` | desktop | light | 0 | 33 |
 | Practise (tracks, widgets) | `/m/m13/practise` | desktop | light | 0 | 34 |
 | Check & applied tasks | `/m/m4/check` | desktop | light | 0 | 26 |
-| Knowledge check question | `/quiz/m0` | desktop | light | 0 | 23 |
+| Knowledge check question | `/quiz/m0` | desktop | light | 0 | 21 |
 | Exam intro | `/exam/cp1` | desktop | light | 0 | 21 |
 | Glossary | `/glossary` | desktop | light | 0 | 26 |
 | Tools | `/tools` | desktop | light | 0 | 21 |
