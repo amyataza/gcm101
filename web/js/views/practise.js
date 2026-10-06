@@ -1,7 +1,7 @@
 // Practise page (#/m/:id/practise): worked examples, cases and exercises from the syllabus with the
 // three calculation tracks, plus See (step-through), Do (linked tools) and Hear (read-aloud) layers.
 // Text renders first; widgets, audio, tooltips and the sources panel are attached afterwards.
-import { h, icon, fmtHours, addKids } from '../ui.js';
+import { h, icon, fmtHours, fmtHoursLong, addKids } from '../ui.js';
 import * as content from '../content.js';
 import * as store from '../store.js';
 import * as rules from '../course.js';
@@ -58,7 +58,7 @@ export async function render({ course: c, progress: p, params, settings: s, setT
     h('p', { class: 'small muted' }, 'Track A by hand and Track B in a spreadsheet are part of the course; Track C (Python) is optional.'),
     hearSlot, sheetSlot, toc, list,
     h('div', { class: 'next-bar' }, h('a', { class: 'btn primary', href: `#/m/${m.id}/check`, onclick: markDone }, st.practise?.done ? 'Next: Check' : 'Done — next: Check', icon('arrow'))),
-    h('p', { class: 'muted small' }, `Suggested time for this step: about ${fmtHours(m.hours.practise)}.`),
+    h('p', { class: 'muted small' }, `Suggested time for this step: about ${fmtHoursLong(m.hours.practise)}.`),
     notAdvice(),
     srcSlot);
   applyModes(root, s.modes);

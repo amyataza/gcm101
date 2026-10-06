@@ -1,6 +1,6 @@
 // Learn page (#/m/:id/learn). Text is the baseline and always present; See, Hear and Do blocks are
 // additive and controlled by the mode bar.
-import { h, icon, fmtHours, toast, setKids, addKids } from '../ui.js';
+import { h, icon, fmtHours, fmtHoursLong, toast, setKids, addKids } from '../ui.js';
 import * as content from '../content.js';
 import * as store from '../store.js';
 import * as rules from '../course.js';
@@ -54,7 +54,7 @@ export async function render({ course: c, progress: p, params, query, settings: 
     h('div', { class: 'next-bar' },
       h('button', { class: 'btn quiet hide-sm', onclick: () => window.print() }, icon('print'), 'Print notes'),
       h('a', { class: 'btn primary', href: `#/m/${m.id}/practise`, onclick: markDone }, st.learn?.done ? 'Next: Practise' : 'Done — next: Practise', icon('arrow'))),
-    h('p', { class: 'muted small' }, `Suggested time for this step: about ${fmtHours(m.hours.learn)}. Take breaks; your place is saved.`),
+    h('p', { class: 'muted small' }, `Suggested time for this step: about ${fmtHoursLong(m.hours.learn)}. Take breaks; your place is saved.`),
     notAdvice(),
     srcSlot].filter(Boolean));
   applyModes(root, s.modes);

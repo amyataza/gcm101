@@ -6,7 +6,7 @@ import * as calc from '../calc.js';
 import { resolve, fmtNumber, rng, newSeed } from '../quiz/engine.js';
 import { lineChart, barChart } from './charts.js';
 
-const AI_NOTE = 'Original diagram drafted with AI assistance from the syllabus text, then checked.';
+const AI_NOTE = 'Original diagram drafted with AI assistance from the syllabus text; its numbers are computed by tested code.';
 
 // ------------------------------------------------------------------ shared helpers
 function frame(title, kind, ...children) {
@@ -312,7 +312,7 @@ export function stepper(ex) {
   const next = h('button', { class: 'btn small', type: 'button' }, 'Next ›');
   prev.addEventListener('click', () => { stop(); show(i - 1); });
   next.addEventListener('click', () => { stop(); show(i + 1); });
-  caption.innerHTML = `<p class="muted">Press Play to walk through Track A one step at a time. Each step stays on screen until you move on${''}.</p>`;
+  caption.innerHTML = `<p class="muted">Press Play to walk through Track A one step at a time. Each step stays on screen until you move on.</p>`;
   return h('section', { class: 'widget', 'aria-label': `Walkthrough: ${ex.title}` },
     h('header', {}, icon('eye'), h('h3', {}, `Walkthrough: ${ex.title}`)),
     problem ? h('details', { class: 'textalt' }, h('summary', {}, 'Show the problem'), h('div', { html: problem.html })) : null,

@@ -154,7 +154,7 @@ export async function render({ course: c, setTitle, rerender }) {
     h('label', { class: 'row small', for: 'dl-audio' }, withAudio, 'Include audio summaries (about 0.3–1 MB per module)'),
     h('div', { class: 'row' }, dlAll, clearOffline),
     h('h2', { id: 'data' }, 'Your data'),
-    h('p', { class: 'small' }, `Everything is stored only on this device (${store.storageBackend()}). Nothing is sent to us — there is no account, analytics or tracking. Back up to a file to move to another phone or computer.`),
+    h('p', { class: 'small' }, `Everything is stored only on this device (${store.storageBackend()}). Nothing is sent to the course publisher; there are no accounts, analytics or tracking. Back up to a file to move to another phone or computer.`),
     checkbox('Record my active study time (on this device only)', s.trackTime, (v) => save({ trackTime: v }, v ? 'Study time will be recorded.' : 'Study time will not be recorded.')),
     h('div', { class: 'row' }, exportBtn, importBtn, file),
     h('div', { class: 'row', style: { marginTop: 'var(--s3)' } }, erase),

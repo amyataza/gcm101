@@ -23,7 +23,7 @@ export async function render({ query, setTitle, course: c }) {
       h('p', { class: 'lead' }, `${c.modules.length} modules, ${c.checkpoints.length} checkpoint exams, a final exam and a capstone. About ${c.hours.statedCore} hours, at your own pace.`),
       h('ul', { class: 'prose' },
         h('li', {}, h('strong', {}, 'Free and private. '), 'No account, no ads, no tracking. Your progress is saved only on this device.'),
-        h('li', {}, h('strong', {}, 'Works offline. '), 'Download modules once and study without data.'),
+        h('li', {}, h('strong', {}, 'Works offline. '), 'Download modules once, then study without using mobile data.'),
         h('li', {}, h('strong', {}, 'Every claim is sourced. '), 'Each lesson shows its references and when it was last reviewed.'),
         h('li', {}, h('strong', {}, 'Educational only. '), 'This course explains how markets work. It is not investment advice and does not recommend any investment.'),
         h('li', {}, h('strong', {}, 'Public beta. '), 'Practice questions and activities are awaiting expert review. ', h('a', { href: '#/about/beta' }, 'What this means'), '.')),

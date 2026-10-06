@@ -195,7 +195,7 @@ function examRunner(c, spec, session, key, rerender) {
   const submit = async (auto = false) => {
     if (!auto) {
       const unanswered = session.items.filter((_, i) => session.responses[i] === undefined || session.responses[i] === '').length;
-      const ok = await confirmDialog('Submit your exam?', unanswered ? `${unanswered} question(s) are unanswered. You cannot change answers after submitting.` : 'You cannot change answers after submitting.', 'Submit', 'Keep working');
+      const ok = await confirmDialog('Submit your exam?', unanswered ? `${unanswered} ${unanswered === 1 ? 'question is' : 'questions are'} unanswered. You cannot change answers after submitting.` : 'You cannot change answers after submitting.', 'Submit', 'Keep working');
       if (!ok) return;
     }
     clearInterval(tick);

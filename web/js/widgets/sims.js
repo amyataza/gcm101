@@ -165,7 +165,7 @@ function netting(w) {
   };
   fields.forEach((x) => x.inp.addEventListener('change', draw));
   draw();
-  return frame(w.title || 'See netting at work', h('div', { class: 'grid three' }, ...fields.map((x) => x.el)), out, h('p', { class: 'small muted' }, 'Starts at Worked example 12.4, all trades at 50.'));
+  return frame(w.title || 'See netting at work', h('div', { class: 'grid three' }, ...fields.map((x) => x.el)), out, h('p', { class: 'small muted' }, 'Starts at Worked example 12.4, with all trades at 50.'));
 }
 
 // ------------------------------------------------------------------ settlement dates (M12 WE 12.5)

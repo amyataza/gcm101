@@ -1,4 +1,4 @@
-import { h, icon, fmtHours, statusChip } from '../ui.js';
+import { h, icon, fmtHours, fmtHoursLong, statusChip } from '../ui.js';
 import * as rules from '../course.js';
 import { betaCallout } from './about.js';
 
@@ -14,11 +14,11 @@ export async function render({ course: c, progress: p, setTitle }) {
   if (p.resume && next && p.resume.module === next.id) {
     const st = p.modules[next.id];
     hero = heroCard('Continue where you left off', `${next.code} · ${next.title}`, p.resume.label,
-      `About ${fmtHours(rules.moduleHoursLeft(next, st))} left in this module`, p.resume.route, 'Continue');
+      `About ${fmtHoursLong(rules.moduleHoursLeft(next, st))} left in this module`, p.resume.route, 'Continue');
   } else if (next) {
     const first = passed === 0 && !p.modules[next.id];
     hero = heroCard(first ? 'Start here' : 'Up next', `${next.code} · ${next.title}`, next.why,
-      `About ${fmtHours(next.hours.core)} · Learn, practise, then check`, `#/m/${next.id}`, first ? 'Start Module 0' : `Open ${next.code}`);
+      `About ${fmtHoursLong(next.hours.core)} · Learn, practise, then check`, `#/m/${next.id}`, first ? 'Start Module 0' : `Open ${next.code}`);
   } else {
     hero = heroCard('All modules passed', 'Final exam and capstone', 'You have passed every module knowledge check. Finish with the checkpoint exams, the final exam and the capstone.', '', '#/exams', 'Go to exams');
   }
@@ -63,7 +63,7 @@ export async function render({ course: c, progress: p, setTitle }) {
     h('div', { class: 'card flat', style: { marginTop: 'var(--s4)' } },
       h('div', { class: 'row', style: { justifyContent: 'space-between' } },
         h('strong', {}, `${passed} of ${c.modules.length} modules passed`),
-        h('span', { class: 'muted small' }, `About ${fmtHours(left)} of ${total} h left`)),
+        h('span', { class: 'muted small' }, `About ${Math.round(left)} of ${total} hours left`)),
       h('div', { class: 'progress', role: 'progressbar', 'aria-label': 'Course progress', 'aria-valuemin': 0, 'aria-valuemax': c.modules.length, 'aria-valuenow': passed, style: { marginTop: 'var(--s2)' } },
         h('span', { style: { width: `${(passed / c.modules.length) * 100}%` } }))),
     h('div', { style: { marginTop: 'var(--s3)' } }, betaCallout()),

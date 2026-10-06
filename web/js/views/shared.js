@@ -89,7 +89,7 @@ export async function sourcesPanel(c, m) {
     pending.length ? h('p', { class: 'callout warn small' }, h('strong', {}, 'Primary source pending. '),
       `The syllabus states ${pending.length === 1 ? 'one historical case' : `${pending.length} historical cases`} here at a general level (${pending.map((e) => e.title).join('; ')}). A primary source (regulator, central-bank or court document) is still to be attached, as the syllabus requires before publication.`) : null,
     myErrata.length ? h('p', { class: 'callout warn small' }, h('strong', {}, 'Verification note. '), myErrata.map((e) => e.note).join(' ')) : null,
-    h('p', { class: 'small muted' }, 'Diagrams and interactive tools are original, drafted with AI assistance and checked against the syllabus. Read-aloud uses a synthetic voice. ',
+    h('p', { class: 'small muted' }, 'Diagrams and interactive tools are original and were drafted with AI assistance from the syllabus; their numbers come from tested code. Read-aloud uses a synthetic voice. ',
       h('a', { href: '#/about/ai' }, 'How AI was used'), ' · ', h('a', { href: `#/about/report?from=${encodeURIComponent(location.hash.slice(1).split('?')[0])}` }, 'Report a problem with this page')));
 }
 

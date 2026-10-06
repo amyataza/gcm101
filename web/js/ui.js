@@ -129,6 +129,16 @@ export const fmtHours = (h0) => {
   const mins = Math.round((h0 - whole) * 60);
   return mins ? `${whole} h ${mins} min` : `${whole} h`;
 };
+// Long form for running text ("about 5 hours", "1 hour 30 minutes"); fmtHours is for chips and tables.
+export const fmtHoursLong = (h0) => {
+  if (h0 == null) return '';
+  const total = Math.round(h0 * 60);
+  const hh = Math.floor(total / 60);
+  const mm = total % 60;
+  const p = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+  if (!hh) return p(mm, 'minute');
+  return mm ? `${p(hh, 'hour')} ${p(mm, 'minute')}` : p(hh, 'hour');
+};
 export const fmtPct = (x, dp = 0) => `${(x * 100).toFixed(dp)}%`;
 export const fmtDate = (iso) => {
   try { return new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }); } catch { return iso; }

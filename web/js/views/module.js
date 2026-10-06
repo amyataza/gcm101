@@ -30,7 +30,7 @@ async function renderOverview({ course: c, progress: p, params, setTitle }) {
   return h('article', {},
     moduleHeader(c, m, status),
     status === 'locked' ? h('div', { class: 'callout warn' }, h('p', { class: 'callout-title' }, icon('lock'), ' Locked until you pass the previous module'),
-      h('p', {}, `Pass the ${prev.code} knowledge check (${fmtPct(c.assessment.knowledgeCheckSpec.passMark)}) to unlock this module’s knowledge check. You can still preview the reading and practice now.`),
+      h('p', {}, `Pass the ${prev.code} knowledge check (${fmtPct(c.assessment.knowledgeCheckSpec.passMark)}) to unlock this module’s knowledge check. You can still read the lesson and try the worked examples now.`),
       h('a', { class: 'btn small', href: `#/m/${prev.id}/check` }, `Go to ${prev.code} check`)) : null,
     h('p', { class: 'lead prose' }, h('strong', {}, 'Why it matters. '), h('span', { html: m.whyHtml })),
     h('h2', {}, 'Your path through this module'),
@@ -65,7 +65,7 @@ async function renderCheck({ course: c, progress: p, params, setTitle, rerender 
       h('li', {}, `Pass mark ${fmtPct(pass)} — passing unlocks the next module`),
       h('li', {}, 'Unlimited attempts; questions and numbers change each time'),
       h('li', {}, `Numeric answers are accepted within ±${(c.assessment.knowledgeCheckSpec.tolerance * 100).toFixed(1)}%`),
-      h('li', {}, 'No time limit. Feedback and the worked answer after each question.')),
+      h('li', {}, 'No time limit; you see feedback and the worked answer after each question.')),
     st.kc.attempts.length ? h('p', {}, statusChip(st.kc.passed ? 'passed' : 'failed'), ' ', `Best score ${fmtPct(st.kc.best)} · ${st.kc.attempts.length} attempt${st.kc.attempts.length === 1 ? '' : 's'}${last ? ` · last on ${fmtDate(last.at)}` : ''}`) : null,
     locked
       ? h('p', { class: 'callout warn' }, icon('lock'), ` Pass ${c.modules[idx - 1].code}’s knowledge check first.`)
@@ -105,7 +105,7 @@ async function renderCheck({ course: c, progress: p, params, setTitle, rerender 
     kcCard,
     st.kc.passed && nextMod ? h('div', { class: 'callout ok', style: { marginTop: 'var(--s4)' } }, h('p', { class: 'callout-title' }, icon('check'), ` ${m.code} passed`), h('a', { class: 'btn primary', href: `#/m/${nextMod.id}` }, `Continue to ${nextMod.code}`, icon('arrow'))) : null,
     cp ? h('div', { class: 'callout', style: { marginTop: 'var(--s4)' } }, h('p', { class: 'callout-title' }, icon('flag'), ` ${cp.title}`),
-      h('p', {}, `Comes after this module: ${c.assessment.checkpointSpec.items} questions, ${c.assessment.checkpointSpec.minutes} minutes, formula sheet and calculator allowed, pass mark ${fmtPct(c.assessment.checkpointSpec.passMark)}.`),
+      h('p', {}, `It comes after this module: ${c.assessment.checkpointSpec.items} questions, ${c.assessment.checkpointSpec.minutes} minutes, formula sheet and calculator allowed, pass mark ${fmtPct(c.assessment.checkpointSpec.passMark)}.`),
       h('a', { class: 'btn small', href: `#/exam/${cp.id}` }, 'Go to the checkpoint')) : null,
     tasks.length ? [h('h2', {}, 'Tasks from the syllabus'),
       h('p', { class: 'muted' }, counts
