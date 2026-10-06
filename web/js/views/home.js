@@ -1,5 +1,6 @@
 import { h, icon, fmtHours, statusChip } from '../ui.js';
 import * as rules from '../course.js';
+import { betaCallout } from './about.js';
 
 export async function render({ course: c, progress: p, setTitle }) {
   setTitle('Course map', 'Course map');
@@ -65,6 +66,7 @@ export async function render({ course: c, progress: p, setTitle }) {
         h('span', { class: 'muted small' }, `About ${fmtHours(left)} of ${total} h left`)),
       h('div', { class: 'progress', role: 'progressbar', 'aria-label': 'Course progress', 'aria-valuemin': 0, 'aria-valuemax': c.modules.length, 'aria-valuenow': passed, style: { marginTop: 'var(--s2)' } },
         h('span', { style: { width: `${(passed / c.modules.length) * 100}%` } }))),
+    h('div', { style: { marginTop: 'var(--s3)' } }, betaCallout()),
     h('p', { class: 'notice', style: { marginTop: 'var(--s3)' } }, icon('info'),
       h('span', {}, 'Pass each module’s knowledge check (70%) to unlock the next. You can preview any module’s reading at any time.')),
     ...parts, finale);

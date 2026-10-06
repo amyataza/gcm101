@@ -8,13 +8,13 @@ export async function render(ctx) {
   if (route.name === 'credentials') return credentials(ctx);
   if (route.name === 'methodology') return methodology(ctx);
   const page = ctx.params.page || 'index';
-  const pages = { index, privacy, ai, accessibility, audit, report, disclaimer };
+  const pages = { index, privacy, ai, accessibility, audit, report, disclaimer, beta };
   return (pages[page] || index)(ctx);
 }
 
 const back = () => h('p', {}, h('a', { href: '#/about' }, '‹ About'));
 const navList = () => h('ul', {},
-  [['#/about/disclaimer', 'Educational use only — not investment advice'], ['#/about/privacy', 'Privacy'], ['#/methodology', 'Methodology: how the course was built'], ['#/about/ai', 'Use of AI in this app'],
+  [['#/about/beta', 'What “beta” means here'], ['#/about/disclaimer', 'Educational use only — not investment advice'], ['#/about/privacy', 'Privacy'], ['#/methodology', 'Methodology: how the course was built'], ['#/about/ai', 'Use of AI in this app'],
     ['#/about/accessibility', 'Accessibility statement'], ['#/about/audit', 'Open content issues (transparency report)'], ['#/credentials', 'How GCM-101 maps to other credentials'], ['#/sources', 'All references'], ['#/about/report', 'Report a problem']]
     .map(([href, t]) => h('li', {}, h('a', { href }, t))));
 
@@ -28,12 +28,14 @@ async function index({ course: c, setTitle }) {
     h('p', { class: 'lead' }, c.subtitle),
     h('ul', {}, c.atAGlance.map((a) => h('li', { html: a.html }))),
     h('div', { class: 'callout' }, h('p', { class: 'callout-title' }, icon('shield'), ' Educational only'), h('p', {}, 'GCM-101 explains how capital markets work. It does not give personalised financial, investment, legal or tax advice, and nothing in it is a recommendation to buy or sell anything. Worked examples use illustrative numbers unless a source is cited.')),
+    betaCallout(),
     h('h2', {}, 'Trust at a glance'),
     h('ul', {},
       h('li', {}, `Single source of truth: the ${c.syllabus.code} syllabus v${c.syllabus.version}, dated ${fmtDate(c.syllabus.date)} (${c.syllabus.status}).`),
       h('li', {}, 'Every lesson shows its references, the syllabus lines it comes from and the review date.'),
       h('li', {}, 'Every worked-example answer is recomputed by automated tests; Python examples are executed and checked.'),
-      h('li', {}, `${warn} open item(s) need attention, such as historical cases still awaiting a primary source — `, h('a', { href: '#/about/audit' }, 'see the transparency report'), '.'),
+      h('li', {}, warn ? `${warn} open item(s) in the content audit need attention — ` : 'The content audit has no open warnings; its notes (for example tasks that need live data) are public — ', h('a', { href: '#/about/audit' }, 'see the transparency report'), '.'),
+      h('li', {}, 'Every historical case cites a primary source (regulator, central bank, government or court document).'),
       h('li', {}, 'No accounts, payments, ads, tracking or dark patterns. Progress stays on your device.')),
     h('h2', {}, 'More'),
     navList(),
@@ -55,28 +57,32 @@ async function disclaimer({ setTitle }) {
     h('p', {}, 'Completing GCM-101 does not give you a licence, an accredited qualification or eligibility for any exam. See ', h('a', { href: '#/credentials' }, 'credential mapping'), '.'));
 }
 
-async function privacy({ setTitle, course: c }) {
+async function privacy({ setTitle }) {
   setTitle('Privacy');
+  const site = await content.overlay('site');
+  const host = site.host || 'the website host';
   return h('section', { class: 'prose' }, back(),
     h('h1', {}, 'Privacy'),
-    h('p', { class: 'lead' }, 'Short version: we collect nothing. Your progress lives on your device.'),
+    h('p', { class: 'lead' }, 'Short version: the course publisher collects nothing about you. Your progress lives on your device. The website host and, if you use Python, a file server see ordinary web requests.'),
     h('h2', {}, 'What is stored, and where'),
     h('ul', {},
-      h('li', {}, 'Your settings, progress, quiz attempts, notes and (if switched on) active study time are stored in your browser on this device (IndexedDB, or local storage as a fallback).'),
-      h('li', {}, 'Downloaded lessons and audio are stored in the browser cache so they work offline.'),
-      h('li', {}, 'Nothing is sent to the course publisher. There are no accounts, cookies for tracking, analytics, advertising or third-party trackers.')),
-    h('h2', {}, 'Network requests'),
+      h('li', {}, 'Your settings, progress, quiz attempts, notes and (if switched on) active study time are stored in your browser on this device (IndexedDB, or local storage as a fallback). The app asks the browser to keep this storage so it is not cleared when space runs low.'),
+      h('li', {}, 'Downloaded lessons, audio and (if used) the Python runtime are stored in the browser cache so they work offline.'),
+      h('li', {}, 'The app sends nothing to the course publisher. It sets no cookies and has no accounts, analytics, advertising or third-party trackers.')),
+    h('h2', {}, 'Who can see that you visited'),
     h('ul', {},
-      h('li', {}, 'Course files are fetched from the same website that served the app.'),
-      h('li', {}, 'Only if you choose to run Python in the browser: the Python runtime (Pyodide) is downloaded from cdn.jsdelivr.net. No personal data is sent; the CDN sees an ordinary file request.'),
-      h('li', {}, 'Links to external sources (for example regulators or Google Colab) open in a new tab only when you click them.'),
-      h('li', {}, 'Read-aloud uses on-device voices by default. If you allow online voices in Settings, the text being read is sent to the voice provider chosen by your device.')),
+      h('li', {}, `This site is hosted on ${host}. Like every web host, it receives your IP address, browser details and the files you request when you load pages, and may keep them in its own logs for security and operations. The course publisher does not receive these logs or any visitor statistics. `,
+        site.hostPrivacyUrl ? h('a', { href: site.hostPrivacyUrl, target: '_blank', rel: 'noopener' }, `${host} privacy statement`) : null),
+      h('li', {}, 'Only if you choose to run Python: the Python runtime (Pyodide) is downloaded from cdn.jsdelivr.net, which sees an ordinary file request including your IP address. Your code and answers are not sent; Python runs on your device.'),
+      h('li', {}, 'Read-aloud uses on-device voices by default. If you allow online voices in Settings, the text being read is sent to the voice provider your device uses (for example Google, Apple or Microsoft).'),
+      h('li', {}, 'Links to external sources (regulators, GitHub, Google Colab) open in a new tab only when you click them; those sites have their own privacy policies.')),
     h('h2', {}, 'Your control'),
     h('ul', {},
       h('li', {}, 'Back up, import or erase everything in ', h('a', { href: '#/settings?at=data' }, 'Settings → Your data'), '.'),
       h('li', {}, 'Clearing your browser’s site data also erases everything.'),
-      h('li', {}, 'Exports (progress backup, study-time log) are files you control; share them only if you choose to, for example in a pilot study with informed consent.')),
-    h('p', { class: 'small muted' }, `Privacy-by-design: data minimisation, local processing, no third-party scripts at start-up, content security policy enforced. Reviewed ${fmtDate(c.syllabus.date)}.`));
+      h('li', {}, 'Exports (progress backup, study-time log) are files you control; share them only if you choose to, for example in a pilot study with informed consent.'),
+      h('li', {}, 'Reporting a problem on GitHub is public and needs a GitHub account; please do not include personal information.')),
+    h('p', { class: 'small muted' }, `Privacy by design: data minimisation, processing on your device, no third-party code at start-up, content security policy enforced. Last reviewed ${fmtDate(site.lastAppReview)}.`));
 }
 
 async function ai({ setTitle }) {
@@ -87,7 +93,8 @@ async function ai({ setTitle }) {
     h('p', {}, 'We want you to know exactly which parts were made or assisted by AI.'),
     h('div', { class: 'table-wrap' }, h('table', {}, h('thead', {}, h('tr', {}, h('th', {}, 'Part'), h('th', {}, 'How it was made'), h('th', {}, 'Checks'))),
       h('tbody', {},
-        h('tr', {}, h('th', {}, 'Lesson text, objectives, terms, examples, cases'), h('td', {}, 'Taken from the GCM-101 syllabus without rewording financial claims.'), h('td', {}, 'Extraction script; content audit; references shown on every page.')),
+        h('tr', {}, h('th', {}, 'The syllabus'), h('td', {}, 'Written by the course author with AI assistance (Claude), benchmarked against 13 published programmes.'), h('td', {}, 'Every figure cites a source; worked-example answers recomputed by tests; primary sources attached to historical cases.')),
+        h('tr', {}, h('th', {}, 'Lesson text, objectives, terms, examples, cases'), h('td', {}, 'Taken from the syllabus by a script, without rewording financial claims.'), h('td', {}, 'Extraction script; content audit; references shown on every page.')),
         h('tr', {}, h('th', {}, 'Read-aloud'), h('td', {}, 'Synthetic voice from your device’s text-to-speech engine.'), h('td', {}, 'Reads the on-screen text; nothing added.')),
         h('tr', {}, h('th', {}, 'Audio summaries'), h('td', {}, `AI-generated speech${audio.engine ? ` (${audio.engine.name}; voice: ${audio.engine.voice}; ${audio.engine.licence})` : ''} reading the syllabus text.`), h('td', {}, 'Transcript shown beside every file.')),
         h('tr', {}, h('th', {}, 'Diagrams, calculators, simulations, quiz wording'), h('td', {}, 'Original work drafted with AI assistance (Claude) from the syllabus.'), h('td', {}, 'Numbers come from tested code; each quiz item records the syllabus location it is based on; awaiting subject-matter expert review.')),
@@ -97,9 +104,10 @@ async function ai({ setTitle }) {
 
 async function accessibility({ setTitle }) {
   setTitle('Accessibility');
+  const site = await content.overlay('site');
   return h('section', { class: 'prose' }, back(),
     h('h1', {}, 'Accessibility statement'),
-    h('p', {}, 'Target: WCAG 2.2 level AA. See docs/testing for the latest audit results.'),
+    h('p', {}, 'Target: WCAG 2.2 level AA. ', site.repoUrl ? h('a', { href: `${site.repoUrl}/blob/main/docs/testing/accessibility-report.md`, target: '_blank', rel: 'noopener' }, 'Latest automated audit results') : 'Audit results are in docs/testing.', '.'),
     h('ul', {},
       h('li', {}, 'Works with keyboard only, touch and screen readers (tested with automated axe-core checks; manual screen-reader checks are part of the pilot plan).'),
       h('li', {}, 'Light, dark and high-contrast themes; adjustable text size, font and line spacing; reduced motion.'),
@@ -130,13 +138,21 @@ async function audit({ setTitle }) {
     h('h2', {}, `Notes (${by('info').length})`), tbl(by('info')));
 }
 
-async function report({ setTitle }) {
+async function report({ setTitle, query, course: c }) {
   setTitle('Report a problem');
   const site = await content.overlay('site');
+  const from = query.get('from') || '';
+  // Only the page route and content version go into the pre-filled text — never anything personal.
+  const title = from ? `Problem on ${from}` : 'Problem report';
+  const body = `**Page:** ${from || '(which module and example?)'}\n**Content version:** ${c.contentVersion}\n\n**What looks wrong?**\n\n**What did you expect?**\n\n_Please do not include personal information._`;
+  const url = site.reportUrl ? `${site.reportUrl}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=learner-report` : '';
   return h('section', { class: 'prose' }, back(),
     h('h1', {}, 'Report a problem'),
-    h('p', {}, 'Found an error, a broken link or something hard to use? Please tell us which module and example (for example “M13, Worked example 13.3”) and what you expected.'),
-    site.reportUrl ? h('p', {}, h('a', { class: 'btn primary', href: site.reportUrl, target: '_blank', rel: 'noopener' }, 'Open the issue tracker')) : h('p', {}, 'Tell the organisation or teacher who gave you this course. Course publishers: add a contact link in content/overlays/site.json.'),
+    h('p', {}, 'Found an error, a broken link or something hard to use? Say which module and example (for example “M13, Worked example 13.3”) and what you expected.'),
+    url ? [h('p', {}, h('a', { class: 'btn primary', href: url, target: '_blank', rel: 'noopener' }, from ? 'Report a problem with this page' : 'Open a problem report')),
+      h('p', { class: 'small' }, 'Reports are filed on GitHub, are public, and need a free GitHub account. The form is pre-filled with the page and content version only.')]
+      : h('p', {}, 'Tell the organisation or teacher who gave you this course.'),
+    site.repoUrl ? h('p', { class: 'small' }, 'You can also see problems others have reported: ', h('a', { href: `${site.repoUrl}/issues`, target: '_blank', rel: 'noopener' }, 'open reports'), '.') : null,
     h('p', { class: 'small muted' }, 'Please do not include personal information.'));
 }
 
@@ -203,4 +219,28 @@ async function methodology({ course: c, setTitle }) {
     about.selfCheck.map((s) => h('section', {}, h('h3', {}, s.heading), h('div', { class: 'prose', html: s.html }))),
     h('h2', {}, 'Change log'),
     h('ul', {}, about.changelog.map((x) => h('li', {}, `${x.Version} (${x.Date}): ${x.Change}`))));
+}
+
+export function betaCallout() {
+  return h('div', { class: 'callout warn' }, h('p', { class: 'callout-title' }, 'Public beta'),
+    h('p', {}, 'The syllabus text, its sources and every calculation have been checked. The practice questions, diagrams and activities written for this app are still awaiting review by an independent subject-matter expert, and the course has not yet been piloted with learners. ',
+      h('a', { href: '#/about/beta' }, 'What this means'), ' · ', h('a', { href: '#/about/report' }, 'Report a problem')));
+}
+
+async function beta({ setTitle }) {
+  setTitle('Beta');
+  return h('section', { class: 'prose' }, back(),
+    h('h1', {}, 'What “public beta” means here'),
+    h('h2', {}, 'Checked'),
+    h('ul', {},
+      h('li', {}, 'The syllabus text is shown exactly as written; each lesson shows its references, line numbers and review date.'),
+      h('li', {}, 'Every numeric answer in the syllabus worked examples is recomputed by automated tests, and every Python example is run.'),
+      h('li', {}, 'Each historical case cites a primary source from a regulator, central bank, government or court.'),
+      h('li', {}, 'The app passes automated accessibility (WCAG 2.2 AA) and offline tests.')),
+    h('h2', {}, 'Not yet checked'),
+    h('ul', {},
+      h('li', {}, 'Practice and exam questions, diagrams and activities written for this app (with AI assistance) have not yet been reviewed by an independent subject-matter expert. Each question records the part of the syllabus it is based on.'),
+      h('li', {}, 'The course has not yet been tested with learners, so study-hour estimates are the syllabus’s design targets.'),
+      h('li', {}, 'Screen-reader use has been checked by automated tools, not yet by people who rely on them.')),
+    h('p', {}, 'Scores and the printable learning record are for your own use while the course is in beta. If something looks wrong, please ', h('a', { href: '#/about/report' }, 'report it'), '.'));
 }

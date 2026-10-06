@@ -443,3 +443,5 @@ body[data-route="onboarding"] .main { padding-bottom: var(--s5); }
 
 /* Headings receive focus after navigation (for screen readers) but are not controls: no focus box. */
 main h1[tabindex="-1"]:focus { outline: none; }
+
+.primary-source { border-top: 1px dashed var(--line); padding-top: var(--s2); margin-top: var(--s3); }

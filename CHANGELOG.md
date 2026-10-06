@@ -3,6 +3,22 @@
 All notable changes to the GCM-101 app. Content changes follow the syllabus version
 (`Intro-Global-Capital-Markets-Syllabus.md`); app changes follow semantic versioning.
 
+## [1.0.1] — 2026-10-06 (public beta)
+
+Syllabus **v1.0.1**.
+
+### Changed
+- Syllabus: WE 13.3 price at 6% corrected to 96.53; R7 now cites the JSE Group's own statement instead of Wikipedia; G3 updated; status "public beta".
+- Every one of the 14 historical cases now cites a verified primary source (SEC, Federal Reserve, Bank of England, FSA, FSCA, IMF, Central Bank of Nigeria, Board of Banking Supervision, National Assembly of Zambia, Ghana Ministry of Finance), shown on the case page.
+- Licences: app code MIT; course content CC BY 4.0 (`LICENSE-CONTENT.md`).
+- Privacy page now discloses what the website host (GitHub Pages) and jsDelivr can see, and that problem reports on GitHub are public.
+- "Report a problem" opens a GitHub issue pre-filled with the page and content version only.
+- Public-beta notice on the welcome screen, course map, About page and top bar, with a page explaining what has and has not been checked.
+- `npm test` runs on Node 20 and Node 24.
+
+### Added
+- Dead-end crawler (`tests/e2e/crawl.mjs`) and external link checker (`tools/linkcheck.mjs`).
+
 ## [1.0.0] — 2026-10-06
 
 First release, built from syllabus **GCM-101 v1.0 (2026-10-05)**.
@@ -21,6 +37,6 @@ First release, built from syllabus **GCM-101 v1.0 (2026-10-05)**.
 - Erratum: Worked example 13.3 shows the 6% price as 96.54; it rounds to **96.53** (96.5349). The interpolated (≈ 6.46%) and exact (6.458%) yields are unaffected. Shown in the app beside the example; recorded in `web/content/overlays/errata.json` for correction in syllabus v1.1.
 
 ### Known gaps (see docs/content-audit.md)
-- 14 historical cases still need a primary source before publication (syllabus G3).
+- ~~14 historical cases still need a primary source~~ — resolved in 1.0.1.
 - Quiz items and diagrams await subject-matter-expert review; usability test and hours pilot not yet run (docs/pilot-plan.md).
-- Reference R7 is Wikipedia; replace with a primary source.
+- ~~Reference R7 is Wikipedia~~ — resolved in 1.0.1.

@@ -6,10 +6,12 @@ single source of truth.
 
 - **20 modules (M0–M19) in 7 parts**, 3 checkpoint exams, a final exam and a capstone, about 146 hours (+15 h optional Python).
 - **Four ways to learn, all optional except text:** Read · See · Hear · Do — combine or switch any time.
-- **Trust built in:** every lesson shows its references (`[S#]`, `[R#]`, `[D#]`), syllabus line numbers and review date; every worked-example answer is recomputed by tests; open issues (e.g. historical cases awaiting a primary source) are published in the app.
+- **Trust built in:** every lesson shows its references (`[S#]`, `[R#]`, `[D#]`), syllabus line numbers and review date; every worked-example answer is recomputed by tests; each historical case cites a primary source; the content audit and open issues are published in the app.
 - **Private by design:** no accounts, ads, analytics or tracking. Progress lives on the device (IndexedDB) and can be backed up to a file.
 - **Built for budget phones and patchy data:** no framework, no build step, no web fonts; ~25 KB gzipped first visit; modules download for offline use; audio and Python load only on request.
 
+> **Public beta.** The syllabus, its sources and every calculation are checked; the practice items, diagrams and activities written for the app await independent expert review, and the course has not yet been piloted with learners.
+>
 > Educational only — not investment advice. GCM-101 is not accredited and confers no credential (see the in-app *Credential mapping*).
 
 ## Quick start

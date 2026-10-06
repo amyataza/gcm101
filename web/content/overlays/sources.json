@@ -99,7 +99,34 @@
     "url": "https://www.mofep.gov.gh/sites/default/files/news/Suspension-of-Payments-on-Selected-External-Debts-of-The-GoG.pdf",
     "accessed": "2026-10-06"
    }
+  },
+  {
+   "name": "Steinhoff",
+   "primarySource": {
+    "title": "Administrative order: Dirk Bernd Schreiber (Investigation 369a), records the 6 December 2017 'accounting irregularities' announcement and 61.42% share-price fall (19 March 2024)",
+    "publisher": "Financial Sector Conduct Authority (South Africa)",
+    "url": "https://www2.fsca.co.za/Enforcement-Matters/Lists/Enforcement%20Actions/Attachments/386/SNH%20Signed%20Order%20Letter%20_%20Mr%20Schreiber%20_%2019%20March%202024.pdf",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Thai baht",
+   "primarySource": {
+    "title": "News Brief 97/12: IMF Welcomes Thailand's Exchange Rate Action (2 July 1997)",
+    "publisher": "International Monetary Fund",
+    "url": "https://www.imf.org/external/np/sec/nb/1997/nb9712.htm",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Nigeria",
+   "primarySource": {
+    "title": "FX Structure and Management: 2023-date market unification (14 June 2023 'willing buyer, willing seller' reform)",
+    "publisher": "Central Bank of Nigeria",
+    "url": "https://www.cbn.gov.ng/intops/FXStructureAndManagement.html",
+    "accessed": "2026-10-06"
+   }
   }
  ],
- "_pending": "Still to verify: Steinhoff 2017 (FSCA media release, Sept 2019), Thai baht 1997 (IMF News Brief 97/12 or Bank of Thailand), Nigeria 2023 (CBN circular 'Operational Changes to the Foreign Exchange Market', 14 June 2023)."
+ "_notes": "Thai baht and Nigeria sources confirm the regime change itself; the subsequent crisis/depreciation described in the case is widely documented in IMF country reports."
 }

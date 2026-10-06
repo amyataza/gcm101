@@ -1,9 +1,9 @@
 ---
 title: "Introduction to Global Capital Markets — A Benchmarked Syllabus"
 course_code: GCM-101
-version: 1.0
-date: 2026-10-05
-status: publication-ready draft
+version: 1.0.1
+date: 2026-10-06
+status: public beta
 audience: Adults with no financial background
 delivery: Self-paced online
 tools: [calculator, spreadsheet, python]
@@ -1749,9 +1749,9 @@ Forward rate (year 1→2) = (1 + s2)^2 / (1 + s1) − 1
 #### Worked example 13.3 — Yield from price
 **Problem.** A 4-year bond with a 5% annual coupon trades at 95. What is its yield to maturity?
 **Track A (trial and error).**
-1. At 6%: price = 96.54 (too high → yield must be higher).
+1. At 6%: price = 96.53 (too high → yield must be higher).
 2. At 7%: price = 93.23 (too low).
-3. Interpolate: 6% + (96.54 − 95) / (96.54 − 93.23) × 1% ≈ **6.46%**.
+3. Interpolate: 6% + (96.53 − 95) / (96.53 − 93.23) × 1% ≈ **6.46%**.
 
 **Track B.** `=RATE(4,5,-95,100)` → **6.458%**.
 **Meaning.** The investor earns the 5% coupon *plus* the gain from 95 to 100 spread over four years.
@@ -2742,7 +2742,7 @@ GCM-101 is a standalone course. The table shows where its modules overlap with f
 | IOSCO: 3 objectives, 38 principles | [R2] | When IOSCO revises |
 | CPMI-IOSCO PFMI: 24 principles (2012) | [R3] | When revised |
 | Benchmark course facts (hours, exam formats, versions) | [S1]–[S13] | Annually; CISI v19 effective 10 Sep 2026 |
-| Historical cases (Reserve Primary Fund 2008, Barings 1995, LTCM 1998, GameStop 2021, SVB 2023, Archegos 2021, UK LDI 2022, FTX 2022, LIBOR from 2012, Steinhoff 2017, Zambia 2020, Ghana 2022, Thai baht 1997, Nigeria 2023) | Widely documented; stated only at a general level | **Before publication**, attach one primary source (regulator, central-bank or court document) to each case page |
+| Historical cases (Reserve Primary Fund 2008, Barings 1995, LTCM 1998, GameStop 2021, SVB 2023, Archegos 2021, UK LDI 2022, FTX 2022, LIBOR from 2012, Steinhoff 2017, Zambia 2020, Ghana 2022, Thai baht 1997, Nigeria 2023) | Widely documented; one primary source per case (see app case pages) | Primary sources attached 6 Oct 2026 (one regulator, central-bank, government or court document per case); re-check links annually |
 
 **Arithmetic and code.** Every number in every worked example was recomputed by script, and every Python snippet in this document was executed in Python 3 (with `scipy`) on 5 October 2026 and produced the outputs shown in its comments.
 
@@ -2784,7 +2784,7 @@ Review annually each September (after the SIFMA Fact Book and new CISI/CFA sylla
 - **[R4]** South African Reserve Bank. Media release on Jibar transition (2026). <https://www.resbank.co.za/en/home/publications/publication-detail-pages/media-releases/2026/jibar-tax>; Market Practitioners Group, *"No new Jibar" recommendations* (2026). <https://www.resbank.co.za/content/dam/sarb/publications/financial-markets/committees/mpg/mpg-publications/2026/'No%20new%20Jibar'%20Recommendations.pdf>
 - **[R5]** JSE Magazine. "Full speed ahead" (2026) — JSE T+3 settlement through Strate. <https://www.jsemagazine.co.za/market-place/full-speed-ahead/>
 - **[R6]** SIX Group. *T+1 settlement* (2026). <https://www.six-group.com/en/products-services/securities-services/site/lp/tplusone.html>; BNP Paribas. *Navigating the transition to T+1 in Europe* (2026). <https://globalmarkets.cib.bnpparibas/the-transition-to-t1-in-europe/>
-- **[R7]** *JSE Limited* — largest exchange in Africa by market capitalisation. Wikipedia, accessed October 2026. <https://en.wikipedia.org/wiki/JSE_Limited>
+- **[R7]** JSE Limited. *Welcome to the JSE Group* (group website: "Founded in 1887, the JSE is Africa's largest stock exchange by market capitalisation"), accessed 6 October 2026. <https://group.jse.co.za/>
 
 ---
 
@@ -2792,3 +2792,4 @@ Review annually each September (after the SIFMA Fact Book and new CISI/CFA sylla
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-10-05 | First publication-ready draft: benchmarking of 13 programmes; 20 modules; capstone; credential mapping; self-check |
+| 1.0.1 | 2026-10-06 | Corrected WE 13.3 (price at 6% is 96.53, not 96.54; yields unchanged); replaced R7 (Wikipedia) with the JSE Group's own statement; attached a primary source to each of the 14 historical cases (listed on each case page in the app and in `web/content/overlays/sources.json`); status changed to public beta pending subject-matter review of authored practice items and a learner pilot |

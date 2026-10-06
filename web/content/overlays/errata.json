@@ -9,7 +9,8 @@
       "exact": "96.5349",
       "note": "Recomputing the 4-year, 5% annual-coupon bond at a 6% yield gives 96.5349, which rounds to 96.53 (the syllabus shows 96.54). The interpolated yield (≈ 6.46%) and the exact yield (6.458%) are unaffected.",
       "found": "2026-10-06",
-      "status": "open"
+      "status": "fixed",
+      "fixedIn": "1.0.1"
     }
   ]
 }

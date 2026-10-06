@@ -1,9 +1,12 @@
 {
   "_about": "Deployment details shown on the About pages. Fill these in when you publish; leave blank if you have none. No analytics or third-party services are configured.",
-  "publisher": "",
+  "publisher": "the GCM-101 author (GitHub: amyataza)",
   "reportUrl": "https://github.com/amyataza/gcm101/issues/new",
   "repoUrl": "https://github.com/amyataza/gcm101",
   "licenceCode": "MIT",
   "licenceContent": "Course content (syllabus, lessons, diagrams, activities, audio) is licensed CC BY 4.0. App code is MIT. Third-party names belong to their owners.",
-  "lastAppReview": "2026-10-06"
+  "lastAppReview": "2026-10-06",
+  "host": "GitHub Pages",
+  "hostPrivacyUrl": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+  "status": "beta"
 }

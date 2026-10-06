@@ -26,6 +26,7 @@ export async function render({ course: c, progress: p, params, settings: s, setT
     const art = h('article', { class: 'example', id: ex.id, 'aria-labelledby': `${ex.id}-h` });
     const badges = [h('span', { class: `chip ${ex.kind === 'Case' ? 'brand' : ''}` }, kindLabel[ex.kind] || ex.kind)];
     if (ex.flags.includes('illustrative')) badges.push(h('span', { class: 'chip' }, 'Illustrative numbers'));
+    const primary = (ex.historical || []).filter((hc) => hc.primarySource);
     for (const hc of ex.historical || []) if (!hc.primarySource) badges.push(h('span', { class: 'chip warn', title: 'The syllabus requires one primary source per historical case before publication.' }, icon('warn'), `Primary source pending: ${hc.name}`));
     ex.refs.forEach((r) => badges.push(h('a', { class: 'ref', href: `#/sources/${r}` }, r)));
     addKids(art, h('header', {}, h('h2', { id: `${ex.id}-h`, 'data-read': `${ex.kind} ${ex.num || ''}. ${ex.title}` }, `${ex.kind === 'Track C' ? '' : `${ex.kind} ${ex.num} — `}${ex.title}`), ...badges));
@@ -34,6 +35,8 @@ export async function render({ course: c, progress: p, params, settings: s, setT
         seg.label ? h('p', { class: 'seg-label' }, seg.type === 'track' ? trackIcon(seg.track) : null, seg.label) : null,
         h('div', { html: seg.html })));
     }
+    if (primary.length) addKids(art, h('p', { class: 'small primary-source' }, h('strong', {}, icon('sources'), primary.length > 1 ? ' Primary sources: ' : ' Primary source: '),
+      primary.map((hc, k) => [k ? '; ' : '', h('a', { href: hc.primarySource.url, target: '_blank', rel: 'noopener' }, hc.primarySource.title), ` — ${hc.primarySource.publisher}`])));
     for (const e of (errata.errata || []).filter((x) => x.module === m.id && x.example === ex.id && x.status === 'open')) {
       addKids(art, h('p', { class: 'erratum', role: 'note' }, h('strong', {}, icon('warn'), ` Verification note: the syllabus shows ${e.shown}; recomputing gives ${e.correct} (exact ${e.exact}). `), e.note));
     }

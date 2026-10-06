@@ -117,7 +117,7 @@ Generated 2026-10-06 by `node tools/report-calcs.mjs`. Source of the expected va
 | M13 | we-13.2 | PV of coupons | 16.52 | 16.524376 | ✅ |
 | M13 | we-13.2 | PV of face | 86.23 | 86.229687 | ✅ |
 | M13 | we-13.2 | Price | 102.75 | 102.754063 | ✅ |
-| M13 | we-13.3 | Price at 6% | 96.54 | 96.534894 | ⚠️ erratum |
+| M13 | we-13.3 | Price at 6% | 96.53 | 96.534894 | ✅ |
 | M13 | we-13.3 | Price at 7% | 93.23 | 93.225577 | ✅ |
 | M13 | we-13.3 | Interpolated yield | 6.46% | 6.46381 | ✅ |
 | M13 | we-13.3 | Exact YTM | 6.458% | 6.458124 | ✅ |
@@ -249,7 +249,7 @@ Generated 2026-10-06 by `node tools/report-calcs.mjs`. Source of the expected va
 | M17 | we-17.4 | Stressed total | 40,000,000 | 40000000 | ✅ |
 | M19 | we-19.1 | Turnover ratio | 5% | 5 | ✅ |
 
-**243 of 244 values match exactly; 1 differ.**
+**244 of 244 values match exactly; 0 differ.**
 
 ## Errata found
 

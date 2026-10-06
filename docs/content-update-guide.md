@@ -48,7 +48,7 @@ number must be re-verified by a person.
 
 If a recomputed value disagrees with the syllabus, record it in `web/content/overlays/errata.json` (the app
 shows it beside the example) and correct the syllabus in its next version. Example already recorded:
-**WE 13.3**, price at 6% shows 96.54; the correct rounding is 96.53.
+**WE 13.3** (price at 6% shown as 96.54; correct rounding 96.53) — fixed in syllabus v1.0.1.
 
 ## 4. Overlays (authored additions)
 
@@ -105,7 +105,8 @@ engine can be used: update `engine` in `audio.json` so the AI-disclosure page st
 | January 2027 | Update JIBAR/ZARONIA wording to past tense [R4] |
 | After 11 October 2027 | Update EU/UK/Switzerland T+1 status [R6] |
 | Each September | Full annual review after SIFMA, CISI and CFA releases; bump the syllabus version and date, add a change-log row |
-| Before publication | Attach a primary source to each historical case (14 pending) and resolve audit warnings |
+| When adding a historical case | Attach a primary source in `sources.json` (all 14 current cases have one, checked 6 Oct 2026) |
+| Each year | Re-run `npm run linkcheck`; replace any primary-source link that has moved |
 
 After any review, update the syllabus front-matter `date` (shown as "Last reviewed" on every lesson) and `version`.
 

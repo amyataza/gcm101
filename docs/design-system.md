@@ -46,7 +46,7 @@ three themes (docs/testing/accessibility-report.md).
 | **Course-map row** `.mrow` | Code · title + hours · status chip; locked rows are filled grey and still open for preview |
 | **Steps** `.steps` | Learn → Practise → Check with time estimates and ✓ when done |
 | **Mode bar** `.modebar` | "Learn by: Read ✓ (always on) · See · Hear · Do" — sticky on desktop, inline on phones |
-| **Example card** `.example` | Kind chip, refs, "Primary source pending" warning chip; segments: Problem, Track A/B/C (coloured *and* labelled with icons, dashed for optional C), Meaning note |
+| **Example card** `.example` | Kind chip, refs, a primary-source line for historical cases (or a "Primary source pending" chip if one is missing); segments: Problem, Track A/B/C (coloured *and* labelled with icons, dashed for optional C), Meaning note |
 | **Erratum** `.erratum` | Amber box beside the example: syllabus value vs recomputed value |
 | **Widget** `.widget` | Header with eye (See) or hand (Do) icon; sliders paired with number fields; live results region; chart; reset to syllabus values |
 | **Figure** `.visual` | Title, SVG, caption with source, "Text description" disclosure with data table, AI-assisted label |

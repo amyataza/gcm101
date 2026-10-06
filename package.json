@@ -13,7 +13,7 @@
     "sw": "node tools/build-sw.mjs",
     "build": "npm run content && npm run sw",
     "serve": "node tools/serve.mjs web 8080",
-    "test": "node --test tests/unit/",
+    "test": "node --test tests/unit/*.test.mjs",
     "test:python": "python3 tools/verify_python.py",
     "test:e2e": "node tests/e2e/run.mjs",
     "audit:a11y": "node tests/e2e/a11y.mjs",
