@@ -91,6 +91,4 @@ or any cached Playwright Chromium (`tools/browser.mjs`).
 
 ## Licence
 
-App code: MIT (see `LICENSE`). Diagrams, activities and generated audio in this repository are original
-and released under the same licence. The syllabus text belongs to its authors; check its licence before
-redistributing it. Pyodide (MPL-2.0) is loaded from jsDelivr only when a learner chooses to run Python.
+App code: MIT (`LICENSE`). Course content — syllabus, generated content, diagrams, activities and audio: CC BY 4.0 (`LICENSE-CONTENT.md`). Pyodide (MPL-2.0) loads from jsDelivr only when a learner chooses to run Python.

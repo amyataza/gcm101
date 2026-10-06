@@ -1,9 +1,9 @@
 {
   "_about": "Deployment details shown on the About pages. Fill these in when you publish; leave blank if you have none. No analytics or third-party services are configured.",
   "publisher": "",
-  "reportUrl": "",
-  "repoUrl": "",
+  "reportUrl": "https://github.com/amyataza/gcm101/issues/new",
+  "repoUrl": "https://github.com/amyataza/gcm101",
   "licenceCode": "MIT",
-  "licenceContent": "The syllabus text is © its authors; check its licence before redistributing. App code: MIT. Diagrams, interactive tools and generated audio in this app: original, released with the app code.",
+  "licenceContent": "Course content (syllabus, lessons, diagrams, activities, audio) is licensed CC BY 4.0. App code is MIT. Third-party names belong to their owners.",
   "lastAppReview": "2026-10-06"
 }

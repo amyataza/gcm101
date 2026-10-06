@@ -1,4 +1,105 @@
 {
-  "_about": "Primary sources for the historical cases listed in syllabus G3. Add one entry per case: { \"name\": \"<exact name from G3, e.g. Barings>\", \"primarySource\": { \"title\": \"...\", \"publisher\": \"regulator, central bank or court\", \"url\": \"https://...\", \"accessed\": \"YYYY-MM-DD\" } }. Then run `npm run content`; the 'Primary source pending' badge disappears and the audit updates. Do not add a source you have not read.",
-  "cases": []
+ "_about": "Primary sources for the historical cases listed in syllabus G3. Add one entry per case: { \"name\": \"<exact name from G3, e.g. Barings>\", \"primarySource\": { \"title\": \"...\", \"publisher\": \"regulator, central bank or court\", \"url\": \"https://...\", \"accessed\": \"YYYY-MM-DD\" } }. Then run `npm run content`; the 'Primary source pending' badge disappears and the audit updates. Do not add a source you have not read.",
+ "cases": [
+  {
+   "name": "Reserve Primary Fund",
+   "primarySource": {
+    "title": "SEC Charges Operators of Reserve Primary Fund With Fraud (press release 2009-104, 5 May 2009)",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "url": "https://www.sec.gov/news/press/2009/2009-104.htm",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Barings",
+   "primarySource": {
+    "title": "Report of the Board of Banking Supervision inquiry into the circumstances of the collapse of Barings (18 July 1995)",
+    "publisher": "Board of Banking Supervision / HM Government",
+    "url": "https://www.gov.uk/government/publications/report-into-the-collapse-of-barings-bank",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "LTCM",
+   "primarySource": {
+    "title": "Testimony of Chairman Alan Greenspan: Private-sector refinancing of the large hedge fund, Long-Term Capital Management (1 October 1998)",
+    "publisher": "Board of Governors of the Federal Reserve System",
+    "url": "https://www.federalreserve.gov/boarddocs/testimony/1998/19981001.htm",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "GameStop",
+   "primarySource": {
+    "title": "Staff Report on Equity and Options Market Structure Conditions in Early 2021 (14 October 2021)",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "url": "https://www.sec.gov/files/staff-report-equity-options-market-struction-conditions-early-2021.pdf",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "SVB",
+   "primarySource": {
+    "title": "Review of the Federal Reserve's Supervision and Regulation of Silicon Valley Bank (28 April 2023)",
+    "publisher": "Board of Governors of the Federal Reserve System",
+    "url": "https://www.federalreserve.gov/publications/files/svb-review-20230428.pdf",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Archegos",
+   "primarySource": {
+    "title": "SEC Charges Archegos and its Founder with Massive Market Manipulation Scheme (press release 2022-70, 27 April 2022)",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "url": "https://www.sec.gov/news/press-release/2022-70",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "UK LDI",
+   "primarySource": {
+    "title": "Bank of England announces gilt market operation (28 September 2022)",
+    "publisher": "Bank of England",
+    "url": "https://www.bankofengland.co.uk/news/2022/september/bank-of-england-announces-gilt-market-operation",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "FTX",
+   "primarySource": {
+    "title": "SEC Charges Samuel Bankman-Fried with Defrauding Investors in Crypto Asset Trading Platform FTX (press release 2022-219, 13 December 2022)",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "url": "https://www.sec.gov/news/press-release/2022-219",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "LIBOR",
+   "primarySource": {
+    "title": "Final Notice to Barclays Bank Plc: LIBOR and EURIBOR submissions (27 June 2012)",
+    "publisher": "Financial Services Authority (UK)",
+    "url": "https://www.fca.org.uk/publication/final-notices/barclays-jun12.pdf",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Zambia",
+   "primarySource": {
+    "title": "Ministerial statement: Recent developments regarding the Government's engagement with Eurobond holders (Hansard, 18 November 2020)",
+    "publisher": "National Assembly of Zambia",
+    "url": "https://www.parliament.gov.zm/node/9923",
+    "accessed": "2026-10-06"
+   }
+  },
+  {
+   "name": "Ghana",
+   "primarySource": {
+    "title": "Press release: Suspension of payments on selected external debts of the Government of Ghana (MOF/GA/PR/DSS.22/0019, 19 December 2022)",
+    "publisher": "Ministry of Finance, Ghana",
+    "url": "https://www.mofep.gov.gh/sites/default/files/news/Suspension-of-Payments-on-Selected-External-Debts-of-The-GoG.pdf",
+    "accessed": "2026-10-06"
+   }
+  }
+ ],
+ "_pending": "Still to verify: Steinhoff 2017 (FSCA media release, Sept 2019), Thai baht 1997 (IMF News Brief 97/12 or Bank of Thailand), Nigeria 2023 (CBN circular 'Operational Changes to the Foreign Exchange Market', 14 June 2023)."
 }
