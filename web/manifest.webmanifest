@@ -1,0 +1,26 @@
+{
+  "name": "GCM-101: Introduction to Global Capital Markets",
+  "short_name": "GCM-101",
+  "description": "A free, private, offline-capable course from zero to valuation. Read, see, hear or do. Educational only — not investment advice.",
+  "id": "./",
+  "start_url": "./#/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbfaf7",
+  "theme_color": "#0d5c63",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "finance"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Continue the course", "short_name": "Continue", "url": "./#/", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Glossary", "url": "./#/glossary", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Calculators and simulations", "short_name": "Tools", "url": "./#/tools", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

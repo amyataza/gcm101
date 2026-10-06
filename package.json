@@ -1,0 +1,30 @@
+{
+  "name": "gcm101-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GCM-101 Introduction to Global Capital Markets: a free, offline-first, multimodal progressive web app built from the GCM-101 v1.0 syllabus.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "content": "node tools/extract.mjs",
+    "sw": "node tools/build-sw.mjs",
+    "build": "npm run content && npm run sw",
+    "serve": "node tools/serve.mjs web 8080",
+    "test": "node --test tests/unit/",
+    "test:python": "python3 tools/verify_python.py",
+    "test:e2e": "node tests/e2e/run.mjs",
+    "audit:a11y": "node tests/e2e/a11y.mjs",
+    "audit:lighthouse": "node tests/e2e/lighthouse.mjs",
+    "audio": "python3 tools/build_audio.py",
+    "icons": "node tools/build-icons.mjs",
+    "linkcheck": "node tools/linkcheck.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "lighthouse": "^12.0.0",
+    "playwright": "^1.50.0"
+  }
+}

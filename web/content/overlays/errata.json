@@ -1,0 +1,15 @@
+{
+  "_about": "Verification notes found by recomputing every worked example (tests/unit/syllabus-answers.mjs). The syllabus text is never edited by the app; these notes are shown beside the example so learners see both values. Fix the syllabus in its next version, then remove the entry.",
+  "errata": [
+    {
+      "module": "m13",
+      "example": "we-13.3",
+      "shown": "96.54",
+      "correct": "96.53",
+      "exact": "96.5349",
+      "note": "Recomputing the 4-year, 5% annual-coupon bond at a 6% yield gives 96.5349, which rounds to 96.53 (the syllabus shows 96.54). The interpolated yield (≈ 6.46%) and the exact yield (6.458%) are unaffected.",
+      "found": "2026-10-06",
+      "status": "open"
+    }
+  ]
+}

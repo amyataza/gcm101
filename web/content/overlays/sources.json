@@ -1,0 +1,4 @@
+{
+  "_about": "Primary sources for the historical cases listed in syllabus G3. Add one entry per case: { \"name\": \"<exact name from G3, e.g. Barings>\", \"primarySource\": { \"title\": \"...\", \"publisher\": \"regulator, central bank or court\", \"url\": \"https://...\", \"accessed\": \"YYYY-MM-DD\" } }. Then run `npm run content`; the 'Primary source pending' badge disappears and the audit updates. Do not add a source you have not read.",
+  "cases": []
+}

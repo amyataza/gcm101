@@ -1,0 +1,18 @@
+{
+  "_about": "Exam formula sheet (syllabus A5.2/B5: 'formula sheet provided for all exams'). Modules with a 'Core formulas' block (M4, M13–M16) are added automatically from the syllabus. The lines below are formulas used in the syllabus's own worked examples for the other modules, quoted with their location.",
+  "modules": {
+    "m0": ["Percentage change = (new − old) / old", "1 bp = 0.01% = 0.0001", "Sample variance = Σ(x − mean)² / (n − 1); standard deviation = √variance"],
+    "m1": ["Non-US share = total × (1 − US share)"],
+    "m3": ["Real rate = (1 + nominal) / (1 + inflation) − 1"],
+    "m5": ["T-bill price = Face × (1 − d × t / 360)", "Money-market yield = (Face / Price − 1) × 360 / t; bond-equivalent yield uses 365", "Repo interest = cash × rate × days / 365", "Haircut = (collateral − cash) / collateral"],
+    "m6": ["Current (flat) yield = annual coupon / price"],
+    "m7": ["Market cap = shares × price; dividend yield = dividend / price", "TERP = (n × share price + new shares × subscription price) / (n + new shares); value of a right = TERP − subscription price", "Price-weighted index: sum of prices; cap-weighted: sum of price × shares; equal-weighted: average of returns"],
+    "m8": ["Cross rate: EUR/ZAR = EUR/USD × USD/ZAR", "Forward = Spot × (1 + r_quote) / (1 + r_base)", "Foreign investor's return = (1 + local return) × FX start / FX end − 1"],
+    "m9": ["Futures gain/loss = change in points × multiplier × contracts", "Call payoff = max(S − K, 0); put payoff = max(K − S, 0); profit = payoff − premium", "Break-even: call K + premium; put K − premium", "CDS premium = notional × spread; payout = notional × (1 − recovery)"],
+    "m10": ["NAV per unit = (assets − liabilities) / units", "Premium/discount = (price − NAV) / NAV"],
+    "m11": ["Net proceeds = gross proceeds − fees; first-day return = close / issue price − 1", "Bid-to-cover = total bids / amount sold"],
+    "m12": ["Spread in bp = (ask − bid) / mid × 10,000", "Margin-call price: (shares × P − loan) / (shares × P) = required equity", "Netting reduction = 1 − shares moved net / gross shares"],
+    "m17": ["Parametric VaR = value × z × σ; z(95%) = 1.645, z(99%) = 2.326", "T-day VaR ≈ 1-day VaR × √T", "Expected loss = PD × LGD × EAD", "Repo capacity = bond value × (1 − haircut)"],
+    "m19": ["Turnover ratio = annual value traded / average market capitalisation"]
+  }
+}

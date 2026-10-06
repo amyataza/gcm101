@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+*.log
+docs/testing/lighthouse/*.json
+.claude/settings.local.json

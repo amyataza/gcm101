@@ -1,0 +1,9 @@
+{
+  "_about": "Deployment details shown on the About pages. Fill these in when you publish; leave blank if you have none. No analytics or third-party services are configured.",
+  "publisher": "",
+  "reportUrl": "",
+  "repoUrl": "",
+  "licenceCode": "MIT",
+  "licenceContent": "The syllabus text is © its authors; check its licence before redistributing. App code: MIT. Diagrams, interactive tools and generated audio in this app: original, released with the app code.",
+  "lastAppReview": "2026-10-06"
+}
